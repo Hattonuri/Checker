@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const int numTest = 100;
+const int numTest = 10000;
 const string ADDR = "~/Atom\\ Projects/";
 
 int32_t main() {
@@ -16,22 +16,22 @@ int32_t main() {
     long double badTime = 0, goodTime = 0;
     for (int test = 0; test < numTest; test++){
         tst++;
-        if (tst % 50 == 0) cerr << tst << endl;
+        if (tst % 100 == 0) cerr << tst << endl;
         system((ADDR + "gen.out").c_str());
         vector<string> good, bad;
         string s;
         ifstream fin;
         long double zxc = clock();
-        system((ADDR + "good.out").c_str());
+        system((ADDR + "bad.out").c_str());
         badTime += (clock() - zxc) / CLOCKS_PER_SEC;
         fin.open("output.txt");
-        while (getline(fin, s)) good.push_back(s);
+        while (getline(fin, s)) bad.push_back(s);
         fin.close();
         zxc = clock();
-        system((ADDR + "bad.out").c_str());
+        system((ADDR + "good.out").c_str());
         goodTime += (clock() - zxc) / CLOCKS_PER_SEC;
         fin.open("output.txt");
-        while (getline(fin, s)) bad.push_back(s);
+        while (getline(fin, s)) good.push_back(s);
         fin.close();
         if (good != bad) {
             fin.open("input.txt");
